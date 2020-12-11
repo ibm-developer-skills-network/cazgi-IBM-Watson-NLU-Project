@@ -12,7 +12,6 @@ app.get("/",(req,res)=>{
 
 app.get("/url/emotion", (req,res) => {
 
-    // return res.send("url emotion for "+req.query.url);
     return res.send({"happy":"90","sad":"10"});
 });
 
@@ -22,7 +21,6 @@ app.get("/url/sentiment", (req,res) => {
 
 app.get("/text/emotion", (req,res) => {
     return res.send({"happy":"10","sad":"90"});
-    // return res.send("text emotion for "+req.query.text);
 });
 
 app.get("/text/sentiment", (req,res) => {
