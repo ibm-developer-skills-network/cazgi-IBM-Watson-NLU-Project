@@ -1,0 +1,5 @@
+---
+applications:
+ - name: sentiment-analyzer #change to your project name
+   random-route: false
+   memory: 128M
