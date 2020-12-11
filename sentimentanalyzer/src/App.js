@@ -1,5 +1,6 @@
 import './bootstrap.min.css';
 import './App.css';
+import EmotionTable from './EmotionTable.js';
 import React from 'react';
 import axios from 'axios';
 
@@ -35,17 +36,20 @@ class App extends React.Component {
   sendForSentimentAnalysis = () => {
     this.setState({sentiment:true});
     let ret = "";
-    let url = "";
+    let url = ".";
+
     if(this.state.mode === "url") {
-      url = "http://localhost:3333/url?url="+document.getElementById("textinput").value;
+      url = url+"/url/sentiment?url="+document.getElementById("textinput").value;
     } else {
-      url = "http://localhost:3333/text/"+document.getElementById("textinput").value;
+      url = url+"/text/sentiment?text="+document.getElementById("textinput").value;
     }
     ret = axios.get(url);
     ret.then((response)=>{
+
       //Include code here to check the sentiment and fomrat the data accordingly
-      // this.setState({sentimentOutput:response.data});
-      let output = ""
+
+      this.setState({sentimentOutput:response.data});
+      let output = response.data;
       if(response.data === "positive") {
         output = <div style={{color:"green",fontSize:20}}>{response.data}</div>
       } else if (response.data === "negative"){
@@ -60,26 +64,16 @@ class App extends React.Component {
   sendForEmotionAnalysis = () => {
     this.setState({sentiment:false});
     let ret = "";
-    let url = "";
+    let url = ".";
     if(this.state.mode === "url") {
-      url = "http://localhost:3333/url/emotion?url="+document.getElementById("textinput").value;
+      url = url+"/url/emotion?url="+document.getElementById("textinput").value;
     } else {
-      url = "http://localhost:3333/text/emotion/"+document.getElementById("textinput").value;
+      url = url+"/text/emotion/?text="+document.getElementById("textinput").value;
     }
     ret = axios.get(url);
 
     ret.then((response)=>{
-      this.setState({sentimentOutput:
-        <table className="table table-bordered">
-          <tbody>
-          {
-            Object.entries(response.data).map(([key,val])=>{
-              return <tr><td>{key}</td><td>{val}</td></tr>
-            })
-          }
-          </tbody>
-        </table>
-    });
+      this.setState({sentimentOutput:<EmotionTable emotions={response.data}/>});
   });
   }
   

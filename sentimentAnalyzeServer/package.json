@@ -1,0 +1,12 @@
+{
+  "name": "sentimentanalyzeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sentimentAnalyzerServer.js",
+  "scripts": {
+    "start": "node sentimentAnalyzerServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
