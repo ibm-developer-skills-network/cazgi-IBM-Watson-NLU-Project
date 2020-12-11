@@ -27,7 +27,7 @@ app.get("/text/sentiment", (req,res) => {
     return res.send("text sentiment for "+req.query.text);
 });
 
-app.listen(3333, () => {
-    console.log(`listening at http://localhost:3333`)
-});
+let server = app.listen(0, () => {
+    console.log('Listening', server.address().port)
+})
 
