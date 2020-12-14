@@ -27,7 +27,7 @@ app.get("/text/sentiment", (req,res) => {
     return res.send("text sentiment for "+req.query.text);
 });
 
-let server = app.listen(0, () => {
+let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
 })
 
