@@ -109,7 +109,7 @@ app.get("/url/sentiment", (req,res) => {
     const input = {
         'url': req.query.url,
         'features': {
-            'sentiment': { //capture the overall sentiment
+            'sentiment': { //capture the overall sentiment from the url
             }
         }
     }
