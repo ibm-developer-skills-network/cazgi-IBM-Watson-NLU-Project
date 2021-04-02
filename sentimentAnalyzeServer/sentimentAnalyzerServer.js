@@ -1,7 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
-const app = new express();
 
 function getNLUInstance() {
     let api_key = process.env.API_KEY;
@@ -20,6 +19,8 @@ function getNLUInstance() {
     return naturalLanguageUnderstanding;
 }
 
+const app = new express();
+
 app.use(express.static('client'))
 
 const cors_app = require('cors');
@@ -29,24 +30,58 @@ app.get("/",(req,res)=>{
     res.render('index.html');
   });
 
-app.get("/url/emotion", (req,res) => {
-
-    return res.send({"happy":"90","sad":"10"});
-});
-
-app.get("/url/sentiment", (req,res) => {
-    return res.send("url sentiment for "+req.query.url);
-});
-
 app.get("/text/emotion", (req,res) => {
-    return res.send({"happy":"10","sad":"90"});
+    const analyzeParams = {
+        'text': req.query.text,
+        'features': {
+            'entities': {
+                'emotion': true,
+                'limit': 5
+            }
+        }
+    }
+
+    getNLUInstance()
+        .analyze(analyzeParams)
+        .then(analysisResults =>{ 
+            console.log(JSON.stringify(analysisResults, null, 2));
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
 });
 
 app.get("/text/sentiment", (req,res) => {
-    return res.send("text sentiment for "+req.query.text);
+    const analyzeParams = {
+        'text': req.query.text,
+        'features': {
+            'entities': {
+                'sentiment': true,
+                'limit': 1
+            }
+        }
+    }
+
+    getNLUInstance() 
+        .analyze(analyzeParams)
+        .then(analysisResults =>{ 
+            console.log(JSON.stringify(analysisResults, null, 2));
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
+});
+
+
+
+app.get("/url/emotion", (req,res)=> {
+    return res.send()
+});
+
+app.get("/url/sentiment", (req,res) => {
+    return res.send()
 });
 
 let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
 })
-
