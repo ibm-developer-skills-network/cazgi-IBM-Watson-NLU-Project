@@ -46,7 +46,7 @@ class App extends React.Component {
     ret = axios.get(url);
     ret.then((response)=>{
 
-      //Include code here to check the sentiment and fomrat the data accordingly
+      //Include code here to check the sentiment and format the data accordingly
 
       this.setState({sentimentOutput:response.data});
       let output = response.data;
