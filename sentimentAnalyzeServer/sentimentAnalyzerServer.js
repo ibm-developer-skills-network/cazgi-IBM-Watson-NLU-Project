@@ -1,6 +1,7 @@
 const express = require('express');
 const app = new express();
 const dotenv = require('dotenv')
+const url_helper = require('url');
 
 dotenv.config();
 
@@ -31,23 +32,24 @@ app.get("/",(req,res)=>{
   });
 
 app.get("/url/emotion", (req,res) => {
+    const queryObject=url_helper.parse(req.url,true).query;
+    const url_to_analyze = queryObject.url;
     const analyzeOptions = {
-        'url':`'${req.url}'`,
+        'url':`${url_to_analyze}`,
          'features': {  
              'emotion': {
-                 'document': false,
-                 'target':['life']
+                 'document': true
              }
         }   
     }
     console.log(analyzeOptions);
     let analysis = "";   
     var result = "";
-    getNLUInstance().analyze(analyzeOptions).then(analysisResult=>{result = JSON.stringify(analysisResult);}).catch(err => {result = JSON.stringify(err);});
-    //nluSvc.url = req.url;
-    //return res.send("<p>Request analysis for URL "+ nluSvc.url + "</p>")
-    //return res.send({"happy":"90","sad":"10"});
-    return res.send(result);
+    getNLUInstance().analyze(analyzeOptions).then(analysisResults => {
+    result = JSON.stringify(analysisResults, null, 2); res.send(analysisResults.result.emotion.document.emotion);})
+    .catch(err => {
+    console.log('error:', err);
+    });
 });
 
 app.get("/url/sentiment", (req,res) => {
