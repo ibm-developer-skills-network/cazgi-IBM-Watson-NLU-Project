@@ -36,35 +36,90 @@ app.get("/url/emotion", (req,res) => {
     const url_to_analyze = queryObject.url;
     const analyzeOptions = {
         'url':`${url_to_analyze}`,
-         'features': {  
+         'features': {
              'emotion': {
                  'document': true
              }
-        }   
+        }
     }
     console.log(analyzeOptions);
-    let analysis = "";   
+    let analysis = "";
     var result = "";
     getNLUInstance().analyze(analyzeOptions).then(analysisResults => {
-    result = JSON.stringify(analysisResults, null, 2); res.send(analysisResults.result.emotion.document.emotion);})
+    result = JSON.stringify(analysisResults, null, 2); return res.send(analysisResults.result.emotion.document.emotion);})
     .catch(err => {
     console.log('error:', err);
     });
 });
 
 app.get("/url/sentiment", (req,res) => {
-    return res.send("url sentiment for "+req.query.url);
+    const queryObject=url_helper.parse(req.url,true).query;
+    const url_to_analyze = queryObject.url;
+    const analyzeOptions = {
+        'url':`${url_to_analyze}`,
+         'features': {
+             'sentiment': {
+                 'document': true
+             }
+        }
+    }
+    console.log(analyzeOptions);
+    let analysis = "";
+    var anOutput = "";
+    getNLUInstance().analyze(analyzeOptions).then(analysisResults => {
+    anOutput = JSON.stringify(analysisResults.result.sentiment.document,null,2);
+    //return res.send("'" + `${anOutput}` + "'");
+    return res.send("'" + `${anOutput}` + "'");
+    //return res.send(JSON.parse(anOutput));
+    })
+    .catch(err => {
+    console.log('error:', err);
+    });
 });
 
 app.get("/text/emotion", (req,res) => {
-    return res.send({"happy":"10","sad":"90"});
+    const queryObject=url_helper.parse(req.url,true).query;
+    console.log(queryObject);
+    const analyzeOptions = {
+        'text':`${queryObject.text}`,
+         'features': {
+             'emotion': {
+                 'document': true
+             }
+        }
+    }
+    console.log(analyzeOptions);
+    let analysis = "";
+    var result = "";
+    getNLUInstance().analyze(analyzeOptions).then(analysisResults => {
+    result = JSON.stringify(analysisResults, null, 2); return res.send(analysisResults.result.emotion.document.emotion);})
+    .catch(err => {
+    console.log('error:', err);
+    });
 });
 
 app.get("/text/sentiment", (req,res) => {
-    return res.send("text sentiment for "+req.query.text);
+  const queryObject=url_helper.parse(req.url,true).query;
+  const analyzeOptions = {
+      'text':`${queryObject.text}`,
+       'features': {
+           'sentiment': {
+               'document': true
+           }
+      }
+  }
+  console.log(analyzeOptions);
+  let analysis = "";
+  var anOutput = "";
+  getNLUInstance().analyze(analyzeOptions).then(analysisResults => {
+    result = JSON.stringify(analysisResults, null, 2);
+    return res.send("'" + JSON.stringify(analysisResults.result.sentiment.document) + "'");
+  })
+  .catch(err => {
+  console.log('error:', err);
+  });
 });
 
 let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
 })
-
