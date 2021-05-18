@@ -10,14 +10,28 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "braces": "^3.0.2",
+    "chokidar": "^3.5.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "depd": "^1.1.2",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "ibm-cloud-sdk-core": "^2.10.4",
+    "ibm-watson": "^6.0.4",
+    "iconv-lite": "^0.4.24",
+    "ipaddr.js": "^1.9.1",
+    "picomatch": "^2.2.3",
+    "pstree.remy": "^1.1.8",
+    "qs": "^6.7.0",
+    "stringify": "^5.2.0",
+    "undefsafe": "^2.0.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
   },
- "engines" : {
-        "node" : "12.0.0",
-        "npm" : "5.1.0"
- }
+  "engines": {
+    "node": "12.0.0",
+    "npm": "5.1.0"
+  }
 }

@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+#outTable
+{
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+}
+#Header1
+{
+  width:50%;
+}
+#Header2
+{
+  width:50%;
+
+}
