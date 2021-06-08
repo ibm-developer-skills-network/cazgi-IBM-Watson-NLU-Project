@@ -1,33 +1,20 @@
 const express = require('express');
-const app = new express();
+const app = new express(dotenv);
+dotenv.config();
 
-app.use(express.static('client'))
+function getNLUInstance() {
+    let api_key = process.env.API_KEY;
+    let api_url = process.env.API_URL;
+    
+    const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
+    const { IamAuthenticator } = require('ibm-watson/auth');
 
-const cors_app = require('cors');
-app.use(cors_app());
-
-app.get("/",(req,res)=>{
-    res.render('index.html');
+    const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
+  version: '{2020-06-08}',
+  authenticator: new IamAuthenticator({
+    apikey: 'mVPAuVUngnv_QRgzrMCav8CyRkTMpLjXbwj4QKVja09x',
+  }),
+  serviceUrl: 'https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/87754fa9-88f4-4be2-87ff-ec3b1448bc6a',
   });
-
-app.get("/url/emotion", (req,res) => {
-
-    return res.send({"happy":"90","sad":"10"});
-});
-
-app.get("/url/sentiment", (req,res) => {
-    return res.send("url sentiment for "+req.query.url);
-});
-
-app.get("/text/emotion", (req,res) => {
-    return res.send({"happy":"10","sad":"90"});
-});
-
-app.get("/text/sentiment", (req,res) => {
-    return res.send("text sentiment for "+req.query.text);
-});
-
-let server = app.listen(8080, () => {
-    console.log('Listening', server.address().port)
-})
-
+    return naturalLanguageUnderstanding;
+}
