@@ -30,7 +30,6 @@ class App extends React.Component {
       mode = "text"
       rows = 4
     }
-    document.getElementById("textinput").value = "";
       this.setState({innercomp:<textarea rows={rows} cols="50" id="textinput"/>,
       mode: mode,
       sentimentOutput:[],
