@@ -41,16 +41,17 @@ class App extends React.Component {
     } else {
       url = url+"/text/sentiment?text="+document.getElementById("textinput").value;
     }
+    
     fetch(url).then((response)=>{
         response.text().then((data)=>{
-        this.setState({sentimentOutput:data});
+        // this.setState({sentimentOutput:data});
         let output = data;
-        if(data === "positive") {
-          output = <div style={{color:"green",fontSize:20}}>{data}</div>
-        } else if (data === "negative"){
-          output = <div style={{color:"red",fontSize:20}}>{data}</div>
+        if(data.label === "positive") {
+          output = <div style={{color:"green",fontSize:20}}>{data.score + " " + data.label}</div>
+        } else if (data.label === "negative"){
+          output = <div style={{color:"red",fontSize:20}}>{data.score + " " + data.label}</div>
         } else {
-          output = <div style={{color:"orange",fontSize:20}}>{data}</div>
+          output = <div style={{color:"orange",fontSize:20}}>{data.score + " " + data.label}</div>
         }
         this.setState({sentimentOutput:output});
       })});
@@ -67,6 +68,7 @@ class App extends React.Component {
     }
     fetch(url).then((response)=>{
       response.json().then((data)=>{
+          console.log('data from backend!', data)
       this.setState({sentimentOutput:<EmotionTable emotions={data}/>});
   })})  ;
   }
