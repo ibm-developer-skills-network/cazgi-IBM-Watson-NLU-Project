@@ -49,8 +49,6 @@ app.get("/url/emotion", (req,res) => {
      
     //  naturalLanguageUnderstanding.analyze(analyzeParams)
     //  .then(analysisResults => {
-    //     //Print the JSON returned by NLU instance as a formatted string
-    //     console.log(JSON.stringify(analysisResults.result.keywords[0].emotion,null,2));
     //     //Please refer to the image to see the order of retrieval
     //     return res.send(analysisResults.result.keywords[0].emotion,null,2);
     //  })
