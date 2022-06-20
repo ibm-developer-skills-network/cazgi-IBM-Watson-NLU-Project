@@ -21,7 +21,8 @@ const api_url = process.env.API_URL;
 function getNLUInstance() {
     /*Type the code to create the NLU instance and return it.
     You can refer to the image in the instructions document
-    to do the same.*/
+    to do the same. 
+    */
     const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1');
     const { IamAuthenticator } = require('ibm-watson/auth');
 
