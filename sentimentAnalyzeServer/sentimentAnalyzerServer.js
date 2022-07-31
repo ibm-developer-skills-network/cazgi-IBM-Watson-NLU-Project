@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const app = new express();
+cont port = process.env.PORT || 8080 ;
 
 /*This tells the server to use the client 
 folder for all static resources*/
@@ -145,7 +146,7 @@ app.get("/text/sentiment", (req,res) => {
     });
 });
 
-let server = app.listen(8080, () => {
+let server = app.listen(port, () => {
     console.log('Listening', server.address().port)
 })
 
