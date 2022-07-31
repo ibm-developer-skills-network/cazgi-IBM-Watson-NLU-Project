@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const app = new express();
-cont port = process.env.PORT || 8080 ;
+const port = process.env.PORT || 8080 ;
 
 /*This tells the server to use the client 
 folder for all static resources*/
