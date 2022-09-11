@@ -1,7 +1,7 @@
 ---
 applications:
 - path: .
-  name: sentiment-analyzer #change to be unique in IBM Cloud
+  name: gurkan-444-sentiment-analyzer #change to be unique in IBM Cloud
   memory: 256M
   instances: 1
   random-route: true
