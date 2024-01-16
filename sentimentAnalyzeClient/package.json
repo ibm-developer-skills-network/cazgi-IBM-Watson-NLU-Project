@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../sentimentAnalyzeServer/client &&mv build ../sentimentAnalyzeServer/client",    "test": "react-scripts test",
+    "build": "react-scripts build && rm -rf ../sentimentAnalyzeServer/client &&mv build ../sentimentAnalyzeServer/client",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
